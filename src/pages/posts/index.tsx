@@ -3,7 +3,7 @@ import styles from './style.module.scss';
 
 export default function Posts() {
   return (
-    <> 
+    <>
       <Head>
         <title>Post | Ignews</title>
       </Head>
@@ -13,20 +13,29 @@ export default function Posts() {
           <a href="#">
             <time>12 de março de 2021</time>
             <strong>Creating a Monorepo with Lerna & Yarn Workspaces</strong>
-            <p>In this guide, you will learn how to create a Monorepo to manage multiple packages with a shared build, test, and release process.</p>
+            <p>
+              In this guide, you will learn how to create a Monorepo to manage
+              multiple packages with a shared build, test, and release process.
+            </p>
           </a>
           <a href="#">
             <time>12 de março de 2021</time>
             <strong>Creating a Monorepo with Lerna & Yarn Workspaces</strong>
-            <p>In this guide, you will learn how to create a Monorepo to manage multiple packages with a shared build, test, and release process.</p>
+            <p>
+              In this guide, you will learn how to create a Monorepo to manage
+              multiple packages with a shared build, test, and release process.
+            </p>
           </a>
           <a href="#">
             <time>12 de março de 2021</time>
             <strong>Creating a Monorepo with Lerna & Yarn Workspaces</strong>
-            <p>In this guide, you will learn how to create a Monorepo to manage multiple packages with a shared build, test, and release process.</p>
+            <p>
+              In this guide, you will learn how to create a Monorepo to manage
+              multiple packages with a shared build, test, and release process.
+            </p>
           </a>
         </div>
       </main>
     </>
-  )
+  );
 }
