@@ -30,13 +30,23 @@
 		"react-hooks/rules-of-hooks": "error",
 		"react-hooks/exhaustive-deps": "warn",
 		"react/prop-types": "off",
+		"react/jsx-props-no-spreading": "off",
 		"react/react-in-jsx-scope": "off",
-		"import/prefer-default-export": "off",
-		"@typescript-eslint/explicit-module-boundary-types": "off",
+		"react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
 		"react/self-closing-comp": ["error", {
 			"component": true,
 			"html": true
-		}],
+			}],
+		"import/prefer-default-export": "off",
+		"@typescript-eslint/explicit-module-boundary-types": "off",
+		"jsx-a11y/anchor-is-valid": [
+			"warn",
+			{
+        "components": ["Link"],
+        "specialLink": ["hrefLeft", "hrefRight"],
+        "aspects": ["noHref", "invalidHref", "preferButton"]
+      }
+		],
 		"import/extensions": [
       "error",
       "ignorePackages",
