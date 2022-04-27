@@ -1,25 +1,74 @@
+import Head from 'next/head';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
+import { RichText } from 'prismic-dom';
+
 import { createClient } from '../../services/prismic';
 
-export default function Post() {
-  return <h1>JDHJHJHJHJHJHJHJHJHJHJH</h1>;
+import styles from './post.module.scss';
+
+interface PostProps {
+  post: {
+    slug: string;
+    title: string;
+    content: string;
+    updatedAt: string;
+  };
 }
 
-// export const getServerSideProps: GetServerSideProps = async ({
-//   req,
-//   params,
-// }) => {
-//   const session = await getSession({ req });
-//   const { slug } = params;
+export default function Post({ post }: PostProps) {
+  return (
+    <>
+      <Head>
+        <title>{post.title} | Ignews</title>
+      </Head>
 
-//   const prismicClient = createClient();
+      <main className={styles.container}>
+        <article className={styles.post}>
+          <h1>{post.title}</h1>
+          <time>{post.updatedAt}</time>
+          <div
+            className={styles.postContent}
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
+        </article>
+      </main>
+    </>
+  );
+}
 
-//   const response = await prismicClient.getAllByUIDs('publication-type', slug);
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  params,
+}) => {
+  const session = await getSession({ req });
+  const slug = params?.slug;
 
-//   console.log(response);
+  const prismicClient = createClient();
 
-//   return {
-//     props: {},
-//   };
-// };
+  const response = await prismicClient.getByUID(
+    'publication-type',
+    String(slug),
+    {},
+  );
+
+  const post = {
+    slug,
+    title: RichText.asText(response.data.title),
+    content: RichText.asHtml(response.data.Content),
+    updatedAt: new Date(response.last_publication_date).toLocaleDateString(
+      'pt-BR',
+      {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+      },
+    ),
+  };
+
+  return {
+    props: {
+      post,
+    },
+  };
+};
