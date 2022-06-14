@@ -1,4 +1,8 @@
+import { ExecException } from 'child_process';
 import { signIn, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { Exception } from 'sass';
+import Stripe from 'stripe';
 import { api } from '../../services/api';
 import { getStripeJs } from '../../services/stripe-js';
 import styles from './styles.module.scss';
@@ -8,13 +12,16 @@ interface SubscribeButton {
 }
 
 export function SubscribeButton({ priceId }: SubscribeButton) {
-  const { status } = useSession();
+  const { status, data } = useSession();
+  const router = useRouter();
 
   async function handleSubscribe() {
     if (status !== 'authenticated') {
       signIn('github');
+    }
 
-      return;
+    if (data?.activeSubscription) {
+      router.push('/posts');
     }
 
     try {
@@ -24,8 +31,8 @@ export function SubscribeButton({ priceId }: SubscribeButton) {
 
       const stripe = await getStripeJs();
 
-      await stripe.redirectToCheckout({ sessionId });
-    } catch (err) {
+      await stripe?.redirectToCheckout({ sessionId });
+    } catch (err: any) {
       alert(err.message);
     }
   }
