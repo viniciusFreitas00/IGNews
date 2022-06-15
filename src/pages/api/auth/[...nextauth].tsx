@@ -61,7 +61,7 @@ export default NextAuth({
     async signIn({ user }) {
       const email = user?.email;
 
-      if (email) {
+      if (!email) {
         return false;
       }
 
