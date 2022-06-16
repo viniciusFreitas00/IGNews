@@ -39,14 +39,7 @@
 			}],
 		"import/prefer-default-export": "off",
 		"@typescript-eslint/explicit-module-boundary-types": "off",
-		"jsx-a11y/anchor-is-valid": [
-			"warn",
-			{
-        "components": ["Link"],
-        "specialLink": ["hrefLeft", "hrefRight"],
-        "aspects": ["noHref", "invalidHref", "preferButton"]
-      }
-		],
+		"jsx-a11y/anchor-is-valid": "off",
 		"import/extensions": [
       "error",
       "ignorePackages",

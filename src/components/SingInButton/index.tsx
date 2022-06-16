@@ -7,14 +7,14 @@ import styles from './styles.module.scss';
 export function SingInButton() {
   const session = useSession();
 
-  return session.status == 'authenticated' ? (
+  return session.status === 'authenticated' ? (
     <button
       type="button"
       className={styles.singInButton}
       onClick={() => signOut()}
     >
       <FaGithub color="#04d361" />
-      {session.data.user.name}
+      {session.data.user?.name ?? ''}
       <FiX color="#737380" className={styles.closeIcon} />
     </button>
   ) : (
